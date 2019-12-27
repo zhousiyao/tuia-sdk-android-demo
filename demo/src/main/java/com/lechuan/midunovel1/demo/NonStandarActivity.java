@@ -8,11 +8,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lechuan.midunovel.base.util.FoxBaseCommonUtils;
 import com.lechuan.midunovel.base.util.FoxBaseGsonUtil;
-import com.lechuan.midunovel.demo.R;
-import com.lechuan.midunovel.view.FoxActivity;
 import com.lechuan.midunovel.view.FoxCustomerTm;
 import com.lechuan.midunovel.view.FoxNsTmListener;
-import com.lechuan.midunovel.view.video.Constants;
 import com.lechuan.midunovel.view.video.bean.FoxResponseBean;
 
 

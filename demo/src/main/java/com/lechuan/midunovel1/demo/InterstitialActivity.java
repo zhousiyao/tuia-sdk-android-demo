@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.lechuan.midunovel.base.util.FoxBaseCommonUtils;
-import com.lechuan.midunovel.demo.R;
 import com.lechuan.midunovel.view.FoxListener;
 import com.lechuan.midunovel.view.FoxTbScreen;
 

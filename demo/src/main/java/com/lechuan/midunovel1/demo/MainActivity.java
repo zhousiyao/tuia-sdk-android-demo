@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.lechuan.midunovel.demo.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.floatButton).setOnClickListener(this);
         findViewById(R.id.nsButton).setOnClickListener(this);
         findViewById(R.id.nsVideoButton).setOnClickListener(this);
+        findViewById(R.id.nsInsertButton).setOnClickListener(this);
         userId = getIntent().getStringExtra("userId");
     }
 
@@ -49,8 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, NonStandarActivity.class);
                 break;
             case R.id.nsVideoButton:
-                //积分墙
+                //激励互动
                 intent = new Intent(this, VideoActivity.class);
+                break;
+            case R.id.nsInsertButton:
+                //原生插屏
+                intent = new Intent(this, NativeInterstitialActivity.class);
                 break;
             default:
                 return;
