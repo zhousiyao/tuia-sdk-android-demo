@@ -3,9 +3,12 @@ package com.lechuan.midunovel1.demo;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
+import android.view.KeyEvent;
+
 import com.tuia.ad.Ad;
 import com.tuia.ad.AdCallBack;
 
@@ -16,12 +19,14 @@ public class NativeInterstitialActivity extends BaseActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
     };
 
+    private Ad ad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_native_interstitial);
         if (hasPermission()) {
-            Ad ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH", "323774", "", "");
+            ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH", "323774", "", "");
             ad.init(NativeInterstitialActivity.this, null, new AdCallBack() {
 
                 @Override
@@ -87,5 +92,35 @@ public class NativeInterstitialActivity extends BaseActivity {
             }
         }
         return true;
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (ad != null) {
+            ad.resetAdSize(newConfig.orientation);
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        boolean isConsume = true;
+        if (ad != null) {
+            isConsume = ad.onKeyBack(keyCode, event);
+        }
+        if (!isConsume) {
+            return super.onKeyDown(keyCode, event);
+        }
+        return isConsume;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (ad != null) {
+            ad.destroy();
+        }
     }
 }
