@@ -16,15 +16,11 @@ import com.lechuan.midunovel.view.video.bean.FoxResponseBean;
 
 /**
  * 自定义广告：
- * 1.媒体方自己处理：
- *     素材曝光完成的时候调用 mOxCustomerTm.adExposed()
- *     素材点击的时候调用 mOxCustomerTm.adClicked()
- *     同时需要支持webview加载活动url-设置webview的下载监听-支持下载安装行为
- *
- * 2.SDK内部处理：
+ * 1.SDK内部处理：
  *     素材展示媒体自己加载并在加载成功时调用素材曝光mOxCustomerTm.adExposed()，
  *     素材点击请调用mOxCustomerTm.adClicked()，同时传入返回的活动链接url调用
  *     mOxCustomerTm.openFoxActivity(mDataBean.getActivityUrl());
+ * 2.TUIA_APPKEY，TUIA_APPSECRET 和AdSlotId 保持在同一个媒体维度下  否则校验失败
  */
 public class NonStandarActivity extends BaseActivity {
     private FoxCustomerTm mOxCustomerTm;
@@ -39,7 +35,8 @@ public class NonStandarActivity extends BaseActivity {
         String userId = getIntent().getStringExtra("userId");
 
         mOxCustomerTm = new FoxCustomerTm(this);
-
+        //动态修改配置替换后台获取的TUIA_APPKEY和TUIA_APPSECRET的值
+        //mOxCustomerTm.setConfigInfo(TUIA_APPKEY,TUIA_APPSECRET);
         mOxCustomerTm.setAdListener(new FoxNsTmListener() {
             @Override
             public void onReceiveAd(String result) {
@@ -70,8 +67,8 @@ public class NonStandarActivity extends BaseActivity {
             }
 
         });
+        //广告id跟TUIA_APPKEY和TUIA_APPSECRET 保持同步 在一个媒体维度下
         mOxCustomerTm.loadAd(323780,userId);
-
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,8 +18,12 @@ public class NativeInterstitialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_native_interstitial);
-        //s1：slotId  s2:userId  s3:deviceId
-        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","325021", "", "");
+        //s 传空字符串, s1：slotId  s2:userId  s3:deviceId
+        ad = new Ad("","325021", "", "");
+        //动态修改配置替换后台获取的TUIA_APPKEY和TUIA_APPSECRET的值 可以调用ad.resetSlotId()重置广告id
+        //TUIA_APPKEY，TUIA_APPSECRET 和AdSlotId 保持在同一个媒体维度下  否则校验失败
+        ad.setConfigInfo("2ZjLbhEBCFAzBbihEtxLEq25mXKw","3WjgVkeo3j4GFm9vdcZbYp48TdDncr3NcNNpkLu");
+        ad.resetSlotId("326966");
         ad.init(NativeInterstitialActivity.this, null, Ad.AD_URL_NEW, new AdCallBack() {
 
             @Override
