@@ -1,7 +1,13 @@
 package com.lechuan.midunovel1.demo;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -10,6 +16,13 @@ import com.lechuan.midunovel.demo.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     String userId = null;
+
+
+    private static final String[] NEEDED_PERMISSIONS = new String[]{
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.nsButton).setOnClickListener(this);
         findViewById(R.id.nsCPButton).setOnClickListener(this);
         userId = getIntent().getStringExtra("userId");
+        if (Build.VERSION.SDK_INT >= 23) {
+            if(!lacksPermissions(this,NEEDED_PERMISSIONS)){
+                ActivityCompat.requestPermissions(this,NEEDED_PERMISSIONS,0);
+            }
+        }
     }
 
     @Override
@@ -57,5 +75,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         intent.putExtra("userId", userId);
         startActivity(intent);
+    }
+
+
+    /**
+     * 判断权限集合
+     * permissions 权限数组
+     * return false-表示没有改权限  true-表示权限已开启
+     */
+    public  boolean lacksPermissions(Context mContexts, String[] permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }
