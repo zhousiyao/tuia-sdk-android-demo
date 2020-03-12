@@ -31,7 +31,7 @@ public class NativeInterstitialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_native_interstitial);
         //s appkey s1：slotId  s2:userId  s3:deviceId
-        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","325021", "", "");
+        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","325021", "", "", Ad.AD_NEW_LOADING_HIDE);
         ad.init(NativeInterstitialActivity.this, null, Ad.AD_URL_NEW, new AdCallBack() {
 
             @Override
