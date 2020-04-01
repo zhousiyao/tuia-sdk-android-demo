@@ -37,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.lechuan.midunovel1.demo.NonStandarActivity" />
+        <activity android:name="com.lechuan.midunovel1.demo.NonStandardVideoActivity" />
         <activity
             android:name="com.lechuan.midunovel1.demo.NativeInterstitialActivity"
             android:configChanges="screenSize|orientation" />

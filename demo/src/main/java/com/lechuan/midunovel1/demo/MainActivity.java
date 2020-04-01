@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.floatButton).setOnClickListener(this);
         findViewById(R.id.nsButton).setOnClickListener(this);
         findViewById(R.id.nsCPButton).setOnClickListener(this);
+        findViewById(R.id.nsVideoButton).setOnClickListener(this);
         userId = getIntent().getStringExtra("userId");
         if (Build.VERSION.SDK_INT >= 23) {
-            if(!lacksPermissions(this,NEEDED_PERMISSIONS)){
-                ActivityCompat.requestPermissions(this,NEEDED_PERMISSIONS,0);
+            if (!lacksPermissions(this, NEEDED_PERMISSIONS)) {
+                ActivityCompat.requestPermissions(this, NEEDED_PERMISSIONS, 0);
             }
         }
     }
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //自定义
                 intent = new Intent(this, NativeInterstitialActivity.class);
                 break;
+            case R.id.nsVideoButton:
+                //支持激励视频
+                intent = new Intent(this, NonStandardVideoActivity.class);
+                break;
             default:
                 return;
         }
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * permissions 权限数组
      * return false-表示没有改权限  true-表示权限已开启
      */
-    public  boolean lacksPermissions(Context mContexts, String[] permissions) {
+    public boolean lacksPermissions(Context mContexts, String[] permissions) {
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
