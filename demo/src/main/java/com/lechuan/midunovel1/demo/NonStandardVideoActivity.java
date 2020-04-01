@@ -58,7 +58,7 @@ public class NonStandardVideoActivity extends BaseActivity {
             }
         });
 
-        mOxCustomerTm.loadAdAndReport(323780, userId);
+        mOxCustomerTm.loadAdAndReport(333313, userId);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
